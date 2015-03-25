@@ -1,0 +1,12 @@
+G is in Safe empty state
+G is in Safe empty state
+OOP344, grade: B
+OOP244, grade: A
+OOP244, grade: A
+This is a test for memory reallocation with a long name, grade: F
+This is a test for memory reallocation with a long name, grade: D
+This is a test for memory reallocation with a long name, grade: C
+This is a test for memory reallocation with a long name, grade: B
+This is a test for memory reallocation with a long name, grade: A
+This is a test for memory reallocation with a long name, grade: +
+Tested memory reallocation 600000 times
