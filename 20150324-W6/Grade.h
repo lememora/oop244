@@ -33,17 +33,17 @@ namespace oop244 {
     Grade& operator--();
     Grade operator++(int);
     Grade operator--(int);
-    bool operator<(const Grade& RO);
-    bool operator>(const Grade& RO);
-    bool operator<=(const Grade& RO);
-    bool operator>=(const Grade& RO);
-    bool operator==(const Grade& RO);
-    bool operator!=(const Grade& RO);
+    bool operator<(const Grade& RO) const;
+    bool operator>(const Grade& RO) const;
+    bool operator<=(const Grade& RO) const;
+    bool operator>=(const Grade& RO) const;
+    bool operator==(const Grade& RO) const;
+    bool operator!=(const Grade& RO) const;
     Grade& operator/=(int n);
     Grade& operator+=(const Grade& RO);
     friend Grade operator+(const Grade& LO, const Grade& RO);
     friend std::ostream& operator<<(std::ostream& os, const Grade& RO);
-    std::istream& operator>>(std::istream& is, Grade& RO);
+    friend std::istream& operator>>(std::istream& is, Grade& RO);
   };
 }
 

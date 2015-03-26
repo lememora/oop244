@@ -107,27 +107,27 @@ namespace oop244 {
     return tmp;
   }
 
-  bool Grade::operator<(const Grade& RO) {
+  bool Grade::operator<(const Grade& RO) const {
     return _mark < RO._mark;
   }
 
-  bool Grade::operator>(const Grade& RO) {
+  bool Grade::operator>(const Grade& RO) const {
     return _mark > RO._mark;
   }
 
-  bool Grade::operator<=(const Grade& RO) {
+  bool Grade::operator<=(const Grade& RO) const {
     return _mark <= RO._mark;
   }
 
-  bool Grade::operator>=(const Grade& RO) {
+  bool Grade::operator>=(const Grade& RO) const {
     return _mark >= RO._mark;
   }
 
-  bool Grade::operator==(const Grade& RO) {
+  bool Grade::operator==(const Grade& RO) const {
     return _mark == RO._mark;
   }
 
-  bool Grade::operator!=(const Grade& RO) {
+  bool Grade::operator!=(const Grade& RO) const {
     return _mark != RO._mark;
   }
 
@@ -151,25 +151,32 @@ namespace oop244 {
   }
 
   std::ostream& operator<<(std::ostream& os, const Grade& RO) {
-    if (RO._mark < 0) {
+    if (RO._mark < 0 || RO._name  == (char*)0) {
       os << "Unset Grade Object";
     } else {
-      os << RO._name << ": " << RO._mark << "%, " << RO.value() << endl;
+      os << RO._name << ": " << RO._mark << "%, " << RO.value();
     }
     return os;
   }
 
-  std::istream& Grade::operator>>(std::istream& is, Grade& RO) {
+  std::istream& operator>>(std::istream& is, Grade& RO) {
+	
+	if (RO._name) {
+	  delete [] RO._name;
+	  RO._name = (char*)0;
+	}
+	  
+//	http://www.cplusplus.com/reference/istream/istream/getline/
+	  
     char name[256];
-    int mark;
-
     cout << "Subject name: ";
-    cin.getline(name, 256);
+    is.getline(name, 256);
+	RO._name = new (nothrow) char[strlen(name)+1];
+	strcpy(RO._name, name);
 
     cout << "Mark: ";
-    cin.getline (mark);
-
-    // TODO
+    is >> RO._mark;
+	is.ignore();
 
     return is;
   }
