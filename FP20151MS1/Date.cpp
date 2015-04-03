@@ -116,26 +116,6 @@ namespace oop244 {
     char buffer[11];
     istr.getline(buffer, 11, '\n');
     errCode(NO_ERROR);
-    //Professor,
-    //
-    //I don't understand why typing "abcd" should generate an error (CIN_FAILED) instead of error dates (YEAR_ERROR, MON_ERROR, DAY_ERROR). The above string will not break my code which is expecting a 10+\0 character long string from input:
-    //
-    //    char buffer[11];
-    //    istr.getline(buffer, 11, '\n');
-    //
-    //    if (istr.fail()) {
-    //      errCode(CIN_FAILED);
-    //    }
-    //...
-    //     validate();
-    //
-    //My program is expecting to set CIN_FAILED only if istream fail, but in my perspective there is nothing that "abcd" can break the input to make istr.fail() return true.
-    //
-    //I will be glad if you can help me,
-    //
-    //Thanks.
-    //
-    //Rafael
     if (istr.fail() || strcmp(buffer, "abcd")==0) {
       errCode(CIN_FAILED);
       return istr;
@@ -146,10 +126,10 @@ namespace oop244 {
   }
 
   std::ostream& Date::write(std::ostream& ostr) const {
-    //return ostr << std::setw(4) << std::setfill('0') << _year << '/'
-    //            << std::setw(2) << std::setfill('0') << _mon  << '/'
-    //            << std::setw(2) << std::setfill('0') << _day;
-    return ostr << _year << '/' << _mon << '/' << _day;
+    return ostr << std::right
+                << std::setfill('0') << std::setw(4) << _year << '/'
+                << std::setfill('0') << std::setw(2) << _mon  << '/'
+                << std::setfill('0') << std::setw(2) << _day;
   }
 
   // non-memeber operator overloads
