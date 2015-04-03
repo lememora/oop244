@@ -16,6 +16,7 @@
 #include "general.h"
 #include <iomanip>
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
