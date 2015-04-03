@@ -1,3 +1,17 @@
+// OOP244 Final Project Milestone 1, 20151
+// File Date.h
+// Version 1.0
+// Date 2015/04/02
+// Author   Rafael Moraes
+// Description
+// Header for Date class
+//
+// Revision History
+// -----------------------------------------------------------
+// Name         Date        Reason
+// R.Moraes     2015/04/02  Assignment completion
+////////////////////////////////////////////////////////////////
+
 #include <iostream>
 
 #ifndef __244_DATE_H__
