@@ -127,7 +127,7 @@ namespace oop244 {
 
   std::ostream& Date::write(std::ostream& ostr) const {
     return ostr << std::right
-                << std::setfill('0') << std::setw(4) << _year << '/'
+                << std::setfill('0') << std::setw(2) << _year << '/'
                 << std::setfill('0') << std::setw(2) << _mon  << '/'
                 << std::setfill('0') << std::setw(2) << _day;
   }
