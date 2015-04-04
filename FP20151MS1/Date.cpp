@@ -16,6 +16,7 @@
 #include "general.h"
 #include <iomanip>
 #include <iostream>
+#include <sstream>
 #include <cstring>
 #include <cstdio>
 
@@ -113,15 +114,45 @@ namespace oop244 {
   // IO funtions
 
   std::istream& Date::read(std::istream& istr) {
-    char buffer[11];
-    istr.getline(buffer, 11, '\n');
+    int n;
+    char c;
+
+    // empty safe state
+    _year = 0;
+    _mon = 0;
+    _day = 0;
     errCode(NO_ERROR);
-    if (istr.fail() || strcmp(buffer, "abcd")==0) {
+
+    if (istr >> n && !istr.fail()) {
+      _year = n;
+    } else {
       errCode(CIN_FAILED);
-      return istr;
     }
-    sscanf(buffer, "%d/%d/%d", &_year, &_mon, &_day);
-    validate();
+
+    if (istr >> c && istr.fail()) {
+      errCode(CIN_FAILED);
+    }
+
+    if (istr >> n && !istr.fail()) {
+      _mon = n;
+    } else {
+      errCode(CIN_FAILED);
+    }
+
+    if (istr >> c && istr.fail()) {
+      errCode(CIN_FAILED);
+    }
+
+    if (istr >> n && !istr.fail()) {
+      _day = n;
+    } else {
+      errCode(CIN_FAILED);
+    }
+
+    if (!bad()) {
+      validate();
+    }
+
     return istr;
   }
 
