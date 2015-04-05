@@ -8,12 +8,10 @@ namespace oop244{
   public:
     // pure virutal methods:
 
-    // virtual void draw() const = 0;  // = 0 means it is "pure virtual"
-
-    virtual std::fstream& Store(std::fstream& file) const = 0;
-    virtual std::fstream& Load(std::fstream& file) const = 0;
-    virtual std::ostream& display(std::ostream& os, bool linear) const = 0;
-    virtual std::istream& conInput(std::istream& is) const = 0;
+    virtual std::fstream& store(std::fstream& file) const =0;
+    virtual std::fstream& load(std::fstream& file) =0;
+    virtual std::ostream& display(std::ostream& os, bool linear) const =0;
+    virtual std::istream& conInput(std::istream& is) =0;
 
     // virutal destructor:
 
