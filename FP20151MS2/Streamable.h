@@ -1,7 +1,21 @@
+// OOP244 Final Project Milestone 2, 20152
+// File Streamable.h
+// Version 1.0
+// Date 2015/04/04
+// Author   Rafael Moraes
+// Description
+// Streamable header
+//
+// Revision History
+// -----------------------------------------------------------
+// Name         Streamable        Reason
+// R.Moraes     2015/04/04        Assignment completion
+////////////////////////////////////////////////////////////////
 #ifndef __244__Streamable__
 #define __244__Streamable__
 // hearfile includes:
-
+#include <fstream>
+#include <iostream>
 
 namespace oop244{
   class Streamable{

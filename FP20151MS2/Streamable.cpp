@@ -1,5 +1,16 @@
-#include <fstream>
-#include <iostream>
+// OOP244 Final Project Milestone 2, 20152
+// File Streamable.cpp
+// Version 1.0
+// Date 2015/04/04
+// Author   Rafael Moraes
+// Description
+// Streamable class
+//
+// Revision History
+// -----------------------------------------------------------
+// Name         Streamable        Reason
+// R.Moraes     2015/04/04        Assignment completion
+////////////////////////////////////////////////////////////////
 #include "Streamable.h"
 namespace oop244{
   // destructor:
