@@ -20,6 +20,7 @@
 #include "general.h"
 
 namespace oop244 {
+
   class Item : public Streamable {
   private:
     char _upc[MAX_UPC_LEN + 1];
@@ -31,7 +32,7 @@ namespace oop244 {
 
   public:
     // constructors
-    Item(const char upc[], const char* name, double price, int quantity, bool taxed=true);
+    Item(const char upc[], const char* name, double price, int qtyNeeded, bool taxed=true);
     Item(const Item& I);
 
     // destructor
@@ -39,8 +40,8 @@ namespace oop244 {
 
     // setters
     void upc(char upc[]);
-    void name(char* name);
     void price(double price);
+    void name(char* name);
     void taxed(bool taxed);
     void quantity(int quantity);
     void qtyNeeded(int qtyNeeded);

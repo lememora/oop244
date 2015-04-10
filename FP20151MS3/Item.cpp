@@ -30,11 +30,11 @@ namespace oop244 {
     _name = new (nothrow) char[strlen(name)];
     strncpy(_name, name, strlen(name));
 
+    _quantity = 0;
+
     _price = price;
     _qtyNeeded = qtyNeeded;
     _taxed = taxed;
-
-    _quantity = 0;
   }
 
   Item::Item(const Item& I) {
@@ -66,6 +66,10 @@ namespace oop244 {
     }
   }
 
+  void Item::price(double price) {
+    _price = price;
+  }
+
   void Item::name(char* name) {
     if (_name){
       delete[] _name;
@@ -73,10 +77,6 @@ namespace oop244 {
     }
     _name = new (nothrow) char[strlen(name)];
     strncpy(_name, name, strlen(name));
-  }
-
-  void Item::price(double price) {
-    _price = price;
   }
 
   void Item::taxed(bool taxed) {
@@ -95,12 +95,12 @@ namespace oop244 {
     return _upc;
   }
 
-  const char* Item::name() const {
-    return _name;
-  }
-
   double Item::price() const {
     return _price;
+  }
+
+  const char* Item::name() const {
+    return _name;
   }
 
   bool Item::taxed() const {
@@ -118,7 +118,7 @@ namespace oop244 {
   double Item::cost() const {
     double cost = _price;
     if (_taxed) {
-      cost*= TAX + 1;
+      cost*= TAX+1;
     }
     return cost;
   }
