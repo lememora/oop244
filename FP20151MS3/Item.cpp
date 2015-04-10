@@ -126,7 +126,7 @@ namespace oop244 {
 
   // operator overloads
   bool Item::operator==(const char* upc) {
-    return strcmp(upc, _upc)==0;
+    return strcmp(_upc, upc)==0;
   }
 
   int Item::operator+=(int n) {
