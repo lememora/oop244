@@ -14,6 +14,7 @@
 
 // header file includes
 #include "Item.h"
+#include <cstring>
 
 using namespace std;
 
