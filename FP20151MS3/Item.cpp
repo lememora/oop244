@@ -28,7 +28,7 @@ namespace oop244 {
       delete[] _name;
       _name = (char*)0;
     }
-    _name = new (nothrow) char[strlen(name)];
+    _name = new (nothrow) char[strlen(name) + 1];
     strncpy(_name, name, strlen(name));
 
     _quantity = 0;
@@ -76,7 +76,7 @@ namespace oop244 {
       delete[] _name;
       _name = (char*)0;
     }
-    _name = new (nothrow) char[strlen(name)];
+    _name = new (nothrow) char[strlen(name) + 1];
     strncpy(_name, name, strlen(name));
   }
 
