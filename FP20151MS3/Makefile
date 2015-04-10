@@ -7,4 +7,4 @@ ms3tester:
 	g++ -Wall -std=c++0x ms3tester.cpp Item.cpp Streamable.cpp -o ms3tester
 
 clean:
-	rm -f *.o ms3tester
+	rm -f *.o ms3 ms3tester
