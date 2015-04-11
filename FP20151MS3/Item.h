@@ -29,7 +29,8 @@ namespace oop244 {
     bool _taxed;
     int _quantity;
     int _qtyNeeded;
-
+    void allocate(int size);
+    void deallocate();
   public:
     // constructors
     Item(const char upc[], const char* name, double price, int qtyNeeded, bool taxed=true);

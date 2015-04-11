@@ -20,19 +20,25 @@ using namespace std;
 
 namespace oop244 {
 
-  // constructors
-  Item::Item(const char upc[], const char* name, double price, int qtyNeeded, bool taxed) {
-    strncpy(_upc, upc, MAX_UPC_LEN);
-
+  void Item::allocate(int size){
+    deallocate();
+    _name = new (nothrow) char[size];
+  }
+  void Item::deallocate(){
     if (_name){
       delete[] _name;
       _name = (char*)0;
     }
-    _name = new (nothrow) char[strlen(name) + 1];
-    strncpy(_name, name, strlen(name));
+  }
+
+  // constructors
+  Item::Item(const char upc[], const char* name, double price, int qtyNeeded, bool taxed) {
+    strncpy(_upc, upc, MAX_UPC_LEN);
+
+    allocate(strlen(name) + 1);
+    strcpy(_name, name);
 
     _quantity = 0;
-
     _price = price;
     _qtyNeeded = qtyNeeded;
     _taxed = taxed;
@@ -45,18 +51,14 @@ namespace oop244 {
   Item& Item::operator=(const Item& I) {
     if (this != &I) {
       strcpy(_upc, I._upc);
+
+      allocate(strlen(I._name) + 1);
+      strcpy(_name, I._name);
+
       _quantity = I._quantity;
       _price = I._price;
       _qtyNeeded = I._qtyNeeded;
       _taxed = I._taxed;
-
-      if (_name){
-        delete[] _name;
-        _name = (char*)0;
-      }
-
-      _name = new (nothrow) char[strlen(I._name)];
-      strncpy(_name, I._name, strlen(I._name));
     }
     return *this;
   }
@@ -72,12 +74,8 @@ namespace oop244 {
   }
 
   void Item::name(char* name) {
-    if (_name){
-      delete[] _name;
-      _name = (char*)0;
-    }
-    _name = new (nothrow) char[strlen(name) + 1];
-    strncpy(_name, name, strlen(name));
+    allocate(strlen(name) + 1);
+    strcpy(_name, name);
   }
 
   void Item::taxed(bool taxed) {
@@ -139,10 +137,7 @@ namespace oop244 {
 
   // destructor
   Item::~Item() {
-    if (_name) {
-      delete[] _name;
-      _name = (char*)0;
-    }
+    deallocate();
   }
 
 }
