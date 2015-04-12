@@ -1,7 +1,7 @@
 // OOP244 Final Project Milestone 3, 20152
 // File Item.cpp
 // Version 1.0
-// Date 2015/04/10
+// Date 2015/04/11
 // Author   Rafael Moraes
 // Description
 // Item class
@@ -9,52 +9,47 @@
 // Revision History
 // -----------------------------------------------------------
 // Name         Streamable        Reason
-// R.Moraes     2015/04/10        Assignment completion
+// R.Moraes     2015/04/11        Assignment completion
 ////////////////////////////////////////////////////////////////
 
 // header file includes
 #include "Item.h"
 #include <cstring>
+#define BLANK ((char*)0)
 
 using namespace std;
 
 namespace oop244 {
 
-  void Item::allocate(int size){
+  void Item::allocate(int size) {
     deallocate();
     _name = new (nothrow) char[size];
   }
-  void Item::deallocate(){
-    if (_name){
+  void Item::deallocate() {
+    if (_name != BLANK){
       delete[] _name;
-      _name = (char*)0;
+      _name = BLANK;
     }
   }
 
   // constructors
-  Item::Item(const char upc[], const char* name, double price, int qtyNeeded, bool taxed) {
-    strncpy(_upc, upc, MAX_UPC_LEN);
-
-    allocate(strlen(name) + 1);
-    strcpy(_name, name);
-
+  Item::Item(const char upc_[], const char* name_, double price_, int qtyNeeded_, bool taxed_) : _name(BLANK) {
+    upc(upc_);
+    name(name_);
     _quantity = 0;
-    _price = price;
-    _qtyNeeded = qtyNeeded;
-    _taxed = taxed;
+    _price = price_;
+    _qtyNeeded = qtyNeeded_;
+    _taxed = taxed_;
   }
 
-  Item::Item(const Item& I) {
+  Item::Item(const Item& I) : _name(BLANK) {
     *this = I;
   }
 
   Item& Item::operator=(const Item& I) {
     if (this != &I) {
-      strcpy(_upc, I._upc);
-
-      allocate(strlen(I._name) + 1);
-      strcpy(_name, I._name);
-
+      upc(I._upc);
+      name(I._name);
       _quantity = I._quantity;
       _price = I._price;
       _qtyNeeded = I._qtyNeeded;
@@ -63,9 +58,12 @@ namespace oop244 {
     return *this;
   }
 
-  void Item::upc(char upc[]) {
+  void Item::upc(const char upc[]) {
     if (upc) {
       strncpy(_upc, upc, MAX_UPC_LEN);
+    }
+    if (strlen(upc) >= MAX_UPC_LEN) {
+      _upc[MAX_UPC_LEN] = '\0';
     }
   }
 
@@ -73,7 +71,7 @@ namespace oop244 {
     _price = price;
   }
 
-  void Item::name(char* name) {
+  void Item::name(const char* name) {
     allocate(strlen(name) + 1);
     strcpy(_name, name);
   }

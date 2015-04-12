@@ -1,7 +1,7 @@
 // OOP244 Final Project Milestone 3, 20152
 // File Item.h
 // Version 1.0
-// Date 2015/04/10
+// Date 2015/04/11
 // Author   Rafael Moraes
 // Description
 // Item header file
@@ -9,7 +9,7 @@
 // Revision History
 // -----------------------------------------------------------
 // Name         Streamable        Reason
-// R.Moraes     2015/04/10        Assignment completion
+// R.Moraes     2015/04/11        Assignment completion
 ////////////////////////////////////////////////////////////////
 
 #ifndef __244_ITEM__
@@ -37,12 +37,12 @@ namespace oop244 {
     Item(const Item& I);
 
     // destructor
-    ~Item();
+    virtual ~Item();
 
     // setters
-    void upc(char upc[]);
+    void upc(const char upc[]);
     void price(double price);
-    void name(char* name);
+    void name(const char* name);
     void taxed(bool taxed);
     void quantity(int quantity);
     void qtyNeeded(int qtyNeeded);
