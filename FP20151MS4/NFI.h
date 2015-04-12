@@ -2,6 +2,7 @@
 #define __244_NFI_H__
 
 #include "Item.h"
+#include "ErrorMessage.h"
 
 namespace oop244 {
 
