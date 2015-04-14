@@ -1,9 +1,25 @@
+// OOP244 Final Project Milestone 5, 20151
+// File AidApp.cpp
+// Version 1.0
+// Date 2015/04/14
+// Author   Rafael Moraes
+// Description
+// AidApp class
+//
+// Revision History
+// -----------------------------------------------------------
+// Name         Streamable        Reason
+// R.Moraes     2015/04/14        Assignment completion
+////////////////////////////////////////////////////////////////
+
 #include <cstring>
 #include <new>
 #include <iomanip>
 #include "AidApp.h"
+
 using namespace std;
-namespace oop244{
+
+namespace oop244 {
 
   // copy constructor and assignment operator
 
@@ -118,5 +134,5 @@ namespace oop244{
   int AidApp::run(){
 
 
-  } 
+  }
 }
