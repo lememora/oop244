@@ -1,3 +1,17 @@
+// OOP244 Final Project Milestone 4, 20151
+// File NFI.h
+// Version 1.0
+// Date 2015/04/13
+// Author   Rafael Moraes
+// Description
+// Non-Food Item header file
+//
+// Revision History
+// -----------------------------------------------------------
+// Name         Date              Reason
+// R.Moraes     2015/04/13        Assignment completion
+////////////////////////////////////////////////////////////////
+
 #ifndef __244_NFI_H__
 #define __244_NFI_H__
 
