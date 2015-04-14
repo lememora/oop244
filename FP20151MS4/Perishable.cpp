@@ -80,7 +80,9 @@ namespace oop244 {
         setw(20) << name() << '|' <<
         right << setw(7) << fixed << showpoint << setprecision(2) << cost() << '|' <<
         setw(4) << quantity() << '|' <<
-        qtyNeeded();
+        setw(4) << qtyNeeded() << '|' <<
+        left << setw(10) << unit() << '|' <<
+        expiry();
     } else {
       os <<
         "Upc: "              << upc()       << endl <<

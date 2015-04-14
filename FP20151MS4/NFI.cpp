@@ -56,7 +56,7 @@ namespace oop244{
         setw(20) << name() << '|' <<
         right << setw(7) << fixed << showpoint << setprecision(2) << cost() << '|' <<
         setw(4) << quantity() << '|' <<
-        qtyNeeded();
+        setw(4) << qtyNeeded();
     } else {
       os <<
         "Upc: "              << upc()       << endl <<
@@ -86,7 +86,7 @@ namespace oop244{
       is >> sbuf;
       name(sbuf);
 
-      cout << "Price: ";
+      cout << "price: ";
       is >> dbuf;
       if (cin.fail()) {
         _err.message("Invalid Price Entry");
@@ -95,7 +95,7 @@ namespace oop244{
       }
 
       if (_err.isClear()) {
-        cout << "Quantity On hand: ";
+        cout << "Quantity on hand: ";
         is >> ibuf;
         if (cin.fail()) {
           _err.message("Invalid Quantity Entry");
