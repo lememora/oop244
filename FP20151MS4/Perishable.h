@@ -19,14 +19,15 @@
 #include "Item.h"
 #include "ErrorMessage.h"
 
-#define SBUF_LEN 256
+#define MAX_UNIT_LEN 10
+#define MAX_SBUF_LEN 256
 
 namespace oop244 {
 
   class Perishable : public Item {
   private:
     ErrorMessage _err;
-    char _unit[11];
+    char _unit[MAX_UNIT_LEN+1];
     Date _expiry;
 
   public:
@@ -37,8 +38,8 @@ namespace oop244 {
     std::ostream& display(std::ostream& os, bool linear) const;
     std::istream& conInput(std::istream& is);
 
-    void unit(const char unit[]);
-    void expiry(const Date &expiry);
+    void unit(const char __unit[]);
+    void expiry(const Date &__expiry);
 
     const char* unit() const;
     Date expiry() const;

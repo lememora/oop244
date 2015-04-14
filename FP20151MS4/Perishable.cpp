@@ -27,9 +27,9 @@ namespace oop244 {
 
   void Perishable::unit(const char __unit[]) {
     if (__unit) {
-      strncpy(_unit, __unit, 11);
-      if (strlen(_unit) >= 11) {
-        _unit[10] = '\0';
+      strncpy(_unit, __unit, MAX_UNIT_LEN);
+      if (strlen(__unit) > MAX_UNIT_LEN) {
+        _unit[MAX_UNIT_LEN] = 0;
       }
     }
   }
@@ -52,19 +52,19 @@ namespace oop244 {
   }
 
   fstream& Perishable::load(fstream& file) {
-    char sbuf[SBUF_LEN];
+    char sbuf[MAX_SBUF_LEN];
     char cbuf;
     double dbuf;
     int ibuf;
     Date datebuf;
 
-    file.getline(sbuf, SBUF_LEN, ',');
+    file.getline(sbuf, MAX_SBUF_LEN, ',');
     upc(sbuf);
-    file.getline(sbuf, SBUF_LEN, ',');
+    file.getline(sbuf, MAX_SBUF_LEN, ',');
     name(sbuf);
     file >> dbuf >> cbuf;
     price(dbuf);
-    file.getline(sbuf, SBUF_LEN, ',');
+    file.getline(sbuf, MAX_SBUF_LEN, ',');
     unit(sbuf);
     file >> ibuf >> cbuf;
     quantity(ibuf);
@@ -103,10 +103,10 @@ namespace oop244 {
   }
 
   istream& Perishable::conInput(istream& is) {
-    char sbuf[256];
+    char sbuf[MAX_SBUF_LEN];
     double dbuf;
     int ibuf;
-    Date datebuf;
+    // Date datebuf;
 
     if (is.fail()==false) {
 
@@ -157,7 +157,7 @@ namespace oop244 {
 
         cout << "Unit: ";
         is >> sbuf;
-        upc(sbuf);
+        unit(sbuf);
 
         cout << "Expiry date: ";
         Date datebuf;
@@ -177,7 +177,6 @@ namespace oop244 {
         } else {
           expiry(datebuf);
         }
-
       }
     }
 
