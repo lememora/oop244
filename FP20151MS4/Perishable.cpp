@@ -109,6 +109,10 @@ namespace oop244 {
       is >> sbuf;
       upc(sbuf);
 
+      cout << "Name: ";
+      is >> sbuf;
+      name(sbuf);
+
       cout << "Price: ";
       is >> dbuf;
       if (cin.fail()) {

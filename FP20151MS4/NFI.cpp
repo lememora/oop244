@@ -78,9 +78,13 @@ namespace oop244{
       _err.clear();
       cout << "Non-Food Item Entry: " << endl;
 
-      cout << "Upc: ";
+      cout << "upc: ";
       is >> sbuf;
       upc(sbuf);
+
+      cout << "name: ";
+      is >> sbuf;
+      name(sbuf);
 
       cout << "Price: ";
       is >> dbuf;
