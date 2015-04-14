@@ -78,15 +78,15 @@ namespace oop244{
       _err.clear();
       cout << "Non-Food Item Entry: " << endl;
 
-      cout << "upc: ";
+      cout << "Upc: ";
       is >> sbuf;
       upc(sbuf);
 
-      cout << "name: ";
+      cout << "Name: ";
       is >> sbuf;
       name(sbuf);
 
-      cout << "price: ";
+      cout << "Price: ";
       is >> dbuf;
       if (cin.fail()) {
         _err.message("Invalid Price Entry");
@@ -95,7 +95,7 @@ namespace oop244{
       }
 
       if (_err.isClear()) {
-        cout << "Quantity on hand: ";
+        cout << "Quantity On hand: ";
         is >> ibuf;
         if (cin.fail()) {
           _err.message("Invalid Quantity Entry");
@@ -105,7 +105,7 @@ namespace oop244{
       }
 
       if (_err.isClear()) {
-        cout << "Quantity needed: ";
+        cout << "Quantity Needed: ";
         is >> ibuf;
         if (cin.fail()) {
           _err.message("Invalid Quantity Needed Entry");

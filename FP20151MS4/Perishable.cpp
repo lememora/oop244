@@ -111,7 +111,7 @@ namespace oop244 {
     if (is.fail()==false) {
 
       _err.clear();
-      cout << "Perishable Entry: " << endl;
+      cout << "Perishable Item Entry: " << endl;
 
       cout << "upc: ";
       is >> sbuf;
@@ -134,7 +134,7 @@ namespace oop244 {
       }
 
       if (_err.isClear()) {
-        cout << "Quantity on hand: ";
+        cout << "Quantity On hand: ";
         is >> ibuf;
         if (is.fail()) {
           _err.message("Invalid Quantity Entry");
@@ -144,7 +144,7 @@ namespace oop244 {
       }
 
       if (_err.isClear()) {
-        cout << "Quantity needed: ";
+        cout << "Quantity Needed: ";
         is >> ibuf;
         if (is.fail()) {
           _err.message("Invalid Quantity Needed Entry");
@@ -159,7 +159,7 @@ namespace oop244 {
         is >> sbuf;
         unit(sbuf);
 
-        cout << "Expiry date: ";
+        cout << "Expiry date (YYYY/MM/DD) : ";
         Date datebuf;
         is >> datebuf;
 
