@@ -18,6 +18,8 @@
 #include "Item.h"
 #include "ErrorMessage.h"
 
+#define SBUF_LEN 256
+
 namespace oop244 {
 
   class NFI : public Item {

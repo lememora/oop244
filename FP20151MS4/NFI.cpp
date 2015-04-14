@@ -16,7 +16,6 @@
 #include "NFI.h"
 
 using namespace std;
-#define SBUF_LEN 256
 
 namespace oop244{
 
@@ -52,24 +51,26 @@ namespace oop244{
     if (_err.isClear()==false) {
       os << _err.message();
     } else if (linear) {
-      os << setfill(' ') << left << setw(MAX_UPC_LEN) << upc() << '|' <<
-         setw(20) << name() << '|' <<
-         right << setw(7) << fixed << showpoint << setprecision(2) << cost() << '|' <<
-         setw(4) << quantity() << '|' <<
-         qtyNeeded();
+      os <<
+        setfill(' ') << left << setw(MAX_UPC_LEN) << upc() << '|' <<
+        setw(20) << name() << '|' <<
+        right << setw(7) << fixed << showpoint << setprecision(2) << cost() << '|' <<
+        setw(4) << quantity() << '|' <<
+        qtyNeeded();
     } else {
-      os << "Upc: " << upc() << endl <<
-        "Name: " << name() << endl <<
-        "Price: " << price() << endl <<
-        "Price after tax: " << cost() << endl <<
-        "Quantity On Hand: " << quantity() << endl <<
-        "Quantity Needed: " << qtyNeeded() << endl;
+      os <<
+        "Upc: "              << upc()       << endl <<
+        "Name: "             << name()      << endl <<
+        "Price: "            << price()     << endl <<
+        "Price after tax: "  << cost()      << endl <<
+        "Quantity On Hand: " << quantity()  << endl <<
+        "Quantity Needed: "  << qtyNeeded() << endl;
     }
     return os;
   }
 
   istream& NFI::conInput(istream& is) {
-    char cbuf[256];
+    char sbuf[256];
     double dbuf;
     int ibuf;
 
@@ -78,8 +79,8 @@ namespace oop244{
       cout << "Non-Food Item Entry: " << endl;
 
       cout << "Upc: ";
-      is >> cbuf;
-      upc(cbuf);
+      is >> sbuf;
+      upc(sbuf);
 
       cout << "Price: ";
       is >> dbuf;
