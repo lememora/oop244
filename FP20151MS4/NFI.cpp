@@ -59,9 +59,9 @@ namespace oop244{
         setw(4) << qtyNeeded();
     } else {
       os <<
-        "Upc: "              << upc()       << endl <<
-        "Name: "             << name()      << endl <<
-        "Price: "            << price()     << endl <<
+        "upc: "              << upc()       << endl <<
+        "name: "             << name()      << endl <<
+        "price: "            << price()     << endl <<
         "Price after tax: "  << cost()      << endl <<
         "Quantity On Hand: " << quantity()  << endl <<
         "Quantity Needed: "  << qtyNeeded() << endl;
@@ -105,7 +105,7 @@ namespace oop244{
       }
 
       if (_err.isClear()) {
-        cout << "Quantity Needed: ";
+        cout << "Quantity needed: ";
         is >> ibuf;
         if (cin.fail()) {
           _err.message("Invalid Quantity Needed Entry");

@@ -4,4 +4,4 @@ all:
 	g++ -Wall -std=c++0x nfipshTester.cpp Streamable.cpp Item.cpp NFI.cpp Perishable.cpp ErrorMessage.cpp Date.cpp -o nfipshTester
 
 clean:
-	rm -f nfipshTester
+	rm -f nfipshTester *.txt

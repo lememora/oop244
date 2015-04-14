@@ -25,12 +25,17 @@ namespace oop244 {
     unit("");
   }
 
-  void Perishable::unit(const char unit[]) {
-    strncpy(_unit, unit, 11);
+  void Perishable::unit(const char __unit[]) {
+    if (__unit) {
+      strncpy(_unit, __unit, 11);
+      if (strlen(_unit) >= 11) {
+        _unit[10] = '\0';
+      }
+    }
   }
 
-  void Perishable::expiry(const Date &expiry) {
-    _expiry = expiry;
+  void Perishable::expiry(const Date &__expiry) {
+    _expiry = __expiry;
   }
 
   const char* Perishable::unit() const {
@@ -42,7 +47,7 @@ namespace oop244 {
   }
 
   fstream& Perishable::store(fstream& file) const {
-    file << 'P' << ',' << upc() << ',' << name() << ',' << price() << ',' << unit() << ',' << quantity() << ',' << qtyNeeded() << ',' << expiry() << ',' << endl;
+    file << 'P' << ',' << upc() << ',' << name() << ',' << price() << ',' << unit() << ',' << quantity() << ',' << qtyNeeded() << ',' << expiry() << endl;
     return file;
   }
 
@@ -91,8 +96,8 @@ namespace oop244 {
         "Price after tax: "  << cost()      << endl <<
         "Quantity On Hand: " << quantity()  << endl <<
         "Quantity Needed: "  << qtyNeeded() << endl <<
-        "Unit: "             << qtyNeeded() << endl <<
-        "Expiry date: "      << qtyNeeded() << endl;
+        "Unit: "             << unit()      << endl <<
+        "Expiry date: "      << expiry()    << endl;
     }
     return os;
   }
@@ -104,29 +109,34 @@ namespace oop244 {
     Date datebuf;
 
     if (is.fail()==false) {
+
       _err.clear();
       cout << "Perishable Entry: " << endl;
 
-      cout << "Upc: ";
+      cout << "upc: ";
       is >> sbuf;
-      upc(sbuf);
+      if (is.fail()==false) {
+        upc(sbuf);
+      }
 
-      cout << "Name: ";
+      cout << "name: ";
       is >> sbuf;
-      name(sbuf);
+      if (is.fail()==false) {
+        name(sbuf);
+      }
 
-      cout << "Price: ";
+      cout << "price: ";
       is >> dbuf;
-      if (cin.fail()) {
+      if (is.fail()) {
         _err.message("Invalid Price Entry");
       } else {
         price(dbuf);
       }
 
       if (_err.isClear()) {
-        cout << "Quantity On hand: ";
+        cout << "Quantity on hand: ";
         is >> ibuf;
-        if (cin.fail()) {
+        if (is.fail()) {
           _err.message("Invalid Quantity Entry");
         } else {
           quantity(ibuf);
@@ -134,39 +144,40 @@ namespace oop244 {
       }
 
       if (_err.isClear()) {
-        cout << "Quantity Needed: ";
+        cout << "Quantity needed: ";
         is >> ibuf;
-        if (cin.fail()) {
+        if (is.fail()) {
           _err.message("Invalid Quantity Needed Entry");
         } else {
           qtyNeeded(ibuf);
         }
       }
 
-      cout << "Unit: ";
-      is >> sbuf;
-      upc(sbuf);
-
       if (_err.isClear()) {
 
-        cout << "Expiry date (YYYY/MM/DD) : ";
+        cout << "Unit: ";
+        is >> sbuf;
+        upc(sbuf);
+
+        cout << "Expiry date: ";
         Date datebuf;
         is >> datebuf;
 
         if (datebuf.bad()) {
-          if (_expiry.errCode()==CIN_FAILED) {
+          if (datebuf.errCode()==CIN_FAILED) {
             _err.message("Invalid Date Entry");
-          } else if (_expiry.errCode()==YEAR_ERROR) {
+          } else if (datebuf.errCode()==YEAR_ERROR) {
             _err.message("Invalid Year in Date Entry");
-          } else if (_expiry.errCode()==MON_ERROR) {
+          } else if (datebuf.errCode()==MON_ERROR) {
             _err.message("Invalid Month in Date Entry");
-          } else if (_expiry.errCode()==DAY_ERROR) {
+          } else if (datebuf.errCode()==DAY_ERROR) {
             _err.message("Invalid Day in Date Entry");
           }
           is.setstate(ios::failbit);
         } else {
           expiry(datebuf);
         }
+
       }
     }
 
