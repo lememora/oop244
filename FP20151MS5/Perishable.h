@@ -19,9 +19,6 @@
 #include "Item.h"
 #include "ErrorMessage.h"
 
-#define MAX_UNIT_LEN 10
-#define MAX_SBUF_LEN 256
-
 namespace oop244 {
 
   class Perishable : public Item {

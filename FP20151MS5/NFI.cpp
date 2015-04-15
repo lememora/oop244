@@ -28,21 +28,22 @@ namespace oop244{
   }
 
   fstream& NFI::load(fstream& file) {
-    char sbuf[SBUF_LEN];
-    char cbuf;
-    double dbuf;
-    int ibuf;
+    char s[MAX_TMPS_LEN];
+    char c;
+    double d;
+    int i;
 
-    file.getline(sbuf, SBUF_LEN, ',');
-    upc(sbuf);
-    file.getline(sbuf, SBUF_LEN, ',');
-    name(sbuf);
-    file >> dbuf >> cbuf;
-    price(dbuf);
-    file >> ibuf >> cbuf;
-    quantity(ibuf);
-    file >> ibuf >> cbuf;
-    qtyNeeded(ibuf);
+    file.getline(s, MAX_TMPS_LEN, ',');
+    upc(s);
+    file.getline(s, MAX_TMPS_LEN, ',');
+    name(s);
+    file >> d >> c;
+    price(d);
+    file >> i >> c;
+    quantity(i);
+    file >> i;
+    qtyNeeded(i);
+    file.ignore();
 
     return file;
   }
@@ -59,9 +60,9 @@ namespace oop244{
         setw(4) << qtyNeeded();
     } else {
       os <<
-        "upc: "              << upc()       << endl <<
-        "name: "             << name()      << endl <<
-        "price: "            << price()     << endl <<
+        "Upc: "              << upc()       << endl <<
+        "Name: "             << name()      << endl <<
+        "Price: "            << price()     << endl <<
         "Price after tax: "  << cost()      << endl <<
         "Quantity On Hand: " << quantity()  << endl <<
         "Quantity Needed: "  << qtyNeeded() << endl;
@@ -70,47 +71,47 @@ namespace oop244{
   }
 
   istream& NFI::conInput(istream& is) {
-    char sbuf[256];
-    double dbuf;
-    int ibuf;
+    char s[256];
+    double d;
+    int i;
 
     if (is.fail()==false) {
       _err.clear();
-      cout << "Non-Food Item Entry: " << endl;
+      cout << "Non-Food Item Entry:" << endl;
 
       cout << "Upc: ";
-      is >> sbuf;
-      upc(sbuf);
+      is >> s;
+      upc(s);
 
       cout << "Name: ";
-      is >> sbuf;
-      name(sbuf);
+      is >> s;
+      name(s);
 
       cout << "Price: ";
-      is >> dbuf;
+      is >> d;
       if (cin.fail()) {
         _err.message("Invalid Price Entry");
       } else {
-        price(dbuf);
+        price(d);
       }
 
       if (_err.isClear()) {
         cout << "Quantity On hand: ";
-        is >> ibuf;
+        is >> i;
         if (cin.fail()) {
           _err.message("Invalid Quantity Entry");
         } else {
-          quantity(ibuf);
+          quantity(i);
         }
       }
 
       if (_err.isClear()) {
         cout << "Quantity Needed: ";
-        is >> ibuf;
+        is >> i;
         if (cin.fail()) {
           _err.message("Invalid Quantity Needed Entry");
         } else {
-          qtyNeeded(ibuf);
+          qtyNeeded(i);
         }
       }
     }
