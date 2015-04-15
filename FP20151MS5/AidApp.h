@@ -21,7 +21,7 @@ namespace oop244 {
 
   class AidApp {
     // private member arguments
-    char _filename[256];
+    char _filename[MAX_ISTR_LEN];
     Item* _items[MAX_NO_RECS];
     std::fstream datafile;
     int _noOfItems;

@@ -28,14 +28,14 @@ namespace oop244{
   }
 
   fstream& NFI::load(fstream& file) {
-    char s[MAX_TMPS_LEN];
+    char s[MAX_ISTR_LEN];
     char c;
     double d;
     int i;
 
-    file.getline(s, MAX_TMPS_LEN, ',');
+    file.getline(s, MAX_ISTR_LEN, ',');
     upc(s);
-    file.getline(s, MAX_TMPS_LEN, ',');
+    file.getline(s, MAX_ISTR_LEN, ',');
     name(s);
     file >> d >> c;
     price(d);

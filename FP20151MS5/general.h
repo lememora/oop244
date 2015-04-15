@@ -10,6 +10,6 @@
 #define MAX_NO_RECS 2000 // maximum number of records in the data file.
 
 #define MAX_UNIT_LEN 10
-#define MAX_TMPS_LEN 256
+#define MAX_ISTR_LEN 256
 
 #endif
