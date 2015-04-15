@@ -77,17 +77,17 @@ namespace oop244{
 
     if (is.fail()==false) {
       _err.clear();
-      cout << "Non-Food Item Entry: " << endl;
+      cout << "Non-Food Item Entry:" << endl;
 
-      cout << "Upc: ";
+      cout << "upc: ";
       is >> s;
       upc(s);
 
-      cout << "Name: ";
+      cout << "name: ";
       is >> s;
       name(s);
 
-      cout << "Price: ";
+      cout << "price: ";
       is >> d;
       if (cin.fail()) {
         _err.message("Invalid Price Entry");
