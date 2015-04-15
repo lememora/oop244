@@ -91,9 +91,9 @@ namespace oop244 {
         expiry();
     } else {
       os <<
-        "Upc: "              << upc()       << endl <<
-        "Name: "             << name()      << endl <<
-        "Price: "            << price()     << endl <<
+        "upc: "              << upc()       << endl <<
+        "name: "             << name()      << endl <<
+        "price: "            << price()     << endl <<
         "Price after tax: "  << cost()      << endl <<
         "Quantity On hand: " << quantity()  << endl <<
         "Quantity Needed: "  << qtyNeeded() << endl <<
@@ -114,19 +114,19 @@ namespace oop244 {
       _err.clear();
       cout << "Perishable Item Entry: " << endl;
 
-      cout << "Upc: ";
+      cout << "upc: ";
       is >> s;
       if (is.fail()==false) {
         upc(s);
       }
 
-      cout << "Name: ";
+      cout << "name: ";
       is >> s;
       if (is.fail()==false) {
         name(s);
       }
 
-      cout << "Price: ";
+      cout << "price: ";
       is >> d;
       if (is.fail()) {
         _err.message("Invalid Price Entry");

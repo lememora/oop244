@@ -60,9 +60,9 @@ namespace oop244{
         setw(4) << qtyNeeded();
     } else {
       os <<
-        "upc: "              << upc()       << endl <<
-        "name: "             << name()      << endl <<
-        "price: "            << price()     << endl <<
+        "Upc: "              << upc()       << endl <<
+        "Name: "             << name()      << endl <<
+        "Price: "            << price()     << endl <<
         "Price after tax: "  << cost()      << endl <<
         "Quantity On Hand: " << quantity()  << endl <<
         "Quantity Needed: "  << qtyNeeded() << endl;
@@ -79,15 +79,15 @@ namespace oop244{
       _err.clear();
       cout << "Non-Food Item Entry:" << endl;
 
-      cout << "upc: ";
+      cout << "Upc: ";
       is >> s;
       upc(s);
 
-      cout << "name: ";
+      cout << "Name: ";
       is >> s;
       name(s);
 
-      cout << "price: ";
+      cout << "Price: ";
       is >> d;
       if (cin.fail()) {
         _err.message("Invalid Price Entry");
