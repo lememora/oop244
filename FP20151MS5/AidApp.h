@@ -32,19 +32,17 @@ namespace oop244 {
     AidApp& operator=(const AidApp& A);
 
     // private member fucntions
-
-
+    int menu();
+    void loadRecs();
+    void saveRecs();
+    void listItems() const;
+    int SearchItems(const char* upc) const;
+    void updateQty(const char* upc);
+    void addItem(bool isPerishable);
 
   public:
     // constructor and run member function
-    AidApp(const char* filenamex);
-    int menu();
-    void listItems() const;
-    void saveRecs();
-    void loadRecs();
-    void updateQty(const char* UPC);
-    int SearchItems(const char* upc) const;
-    void addItem(bool isPerishable);
+    AidApp(const char* filename);
     int run();
   };
 }
