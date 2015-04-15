@@ -33,9 +33,17 @@ namespace oop244 {
   // sets _noOfItems to null
   // loads the Records
   AidApp::AidApp(const char* filename) {
-
-
-
+    if (filename) {
+      strncpy(_filename, filename, MAX_ISTR_LEN);
+      if (strlen(filename) >= MAX_ISTR_LEN) {
+        _filename[MAX_ISTR_LEN-1] = 0;
+      }
+      _noOfItems = MAX_NO_RECS;
+      while (_noOfItems-- > 0) {
+        _items[_noOfItems] = 0;
+      }
+      loadRecs();
+    }
   }
 
   // Menu() displays the menu as follows and waits for the user to
@@ -45,20 +53,41 @@ namespace oop244 {
   // this funtion makes sure there is no characters left in keyboard
   // and wipes it before exit.
   int AidApp::menu() {
-
-    return -1;
-
+    unsigned short n;
+    cout <<
+      "Disaster Aid Supply Management Program" << endl <<
+      "1 - List items" << endl <<
+      "2 - Add Non-food item Item" << endl <<
+      "3 - Add Perishable item" << endl <<
+      "4 - Update item quantity" << endl <<
+      "0 - exit program" << endl <<
+      "> ";
+    return (cin >> n && !cin.fail() && n < 5) ? n : -1;
   }
 
 
   // lists all the items in linear format on the screen
 
   void AidApp::listItems() const {
-
-
-
-
-
+    cout <<
+      left << setfill(' ') << setw(6) << "Row" << "|" <<
+      left << setfill(' ') << setw(8)  << "UPC" << "|" <<
+      left << setfill(' ') << setw(20) << "Item Name" << "|" <<
+      left << setfill(' ') << setw(7)  << "Cost" << "|" <<
+      right << setfill(' ') << setw(4)  << "QTY" << "|" <<
+      right << setfill(' ') << setw(4)  << "Need" << "|" <<
+      left << setfill(' ') << setw(10) << "Unit" << "|" <<
+      right << setfill(' ') << setw(10) << "Expiry" <<
+      endl <<
+      left << setfill('-') <<
+      left << setfill(' ') << setw(5) << "|-" <<
+      left << setfill(' ') << setw(7) << "|-" <<
+      left << setfill(' ') << setw(19) << "|-" <<
+      left << setfill(' ') << setw(6) << "|" <<
+      right << setfill(' ') << setw(4) << "|" <<
+      left << setfill(' ') << setw(4) << "|-" <<
+      left << setfill(' ') << setw(9) << "|-" <<
+      left << setfill(' ') << setw(9) << endl;
   }
 
 
