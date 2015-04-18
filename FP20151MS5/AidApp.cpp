@@ -120,6 +120,7 @@ namespace oop244 {
   void AidApp::loadRecs() {
     int readIndex = 0;
     char c;
+    Item* i;
 
     datafile.open(_filename, ios::in);
     if (datafile.fail()) {
@@ -134,14 +135,16 @@ namespace oop244 {
         }
         datafile.ignore();
 
+        i = (Item*)0;
         if (c=='N') {
-          _items[readIndex] = new NFI();
+          i = new NFI();
         } else if (c == 'P') {
-          _items[readIndex] = new Perishable();
+          i = new Perishable();
         }
 
-        if (_items[readIndex] != ((Item*)0)) {
-          _items[readIndex++]->load(datafile);
+        if (i != ((Item*)0)) {
+          i->load(datafile);
+          _items[readIndex++] = i;
         }
       } while (true);
     }
@@ -160,20 +163,24 @@ namespace oop244 {
   void AidApp::updateQty(const char* UPC) {
     int c=SearchItems(UPC);
     int q, r = 0;
+    Item* i;
+
     if (c == -1) {
       cout << "Not found!" << endl;
     } else {
-      _items[c]->display(cout, false);
+      i = _items[c];
+      i->display(cout, false);
       cout << endl << "Please enter the number of purchased items: ";
       cin >> q;
       if (cin.fail()) {
         cout << "Invalid Quantity value!" << endl;
       } else {
-        r = _items[c]->qtyNeeded() - _items[c]->quantity();
+        cin.ignore();
+        r = i->qtyNeeded() - i->quantity();
         if (q <= r) {
-          _items[c] += q;
+          (*i) += q;
         } else {
-          _items[c] += r;
+          (*i) += r;
           cout << "Too much items, only " << r << " is needed, please return the extra " << (q+r) << " items." << endl;
         }
         saveRecs();
