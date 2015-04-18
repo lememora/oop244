@@ -9,7 +9,7 @@
 // Revision History
 // -----------------------------------------------------------
 // Name         Streamable        Reason
-// R.Moraes     2015/04/14        Assignment completion
+// R.Moraes     2015/04/17        Assignment completion
 ////////////////////////////////////////////////////////////////
 
 #include <cstring>
@@ -55,7 +55,7 @@ namespace oop244 {
   // this funtion makes sure there is no characters left in keyboard
   // and wipes it before exit.
   int AidApp::menu() {
-    unsigned short n;
+    unsigned int n;
     cout <<
       "Disaster Aid Supply Management Program" << endl <<
       "1 - List items" << endl <<
@@ -64,32 +64,34 @@ namespace oop244 {
       "4 - Update item quantity" << endl <<
       "0 - exit program" << endl <<
       "> ";
-    return (cin >> n && !cin.fail() && n < 5) ? n : -1;
+    cin >> n;
+    if (cin.fail()) {
+      cin.clear();
+      cin.ignore();
+      n = -1;
+    }
+    return n < 5 ? n : -1;
   }
 
 
   // lists all the items in linear format on the screen
 
   void AidApp::listItems() const {
+    int c = 0;
+    double t = 0;
+
     cout <<
-      left  << setfill(' ') << setw(6)  << "Row" << "|" <<
-      left  << setfill(' ') << setw(8)  << "UPC" << "|" <<
-      left  << setfill(' ') << setw(20) << "Item Name" << "|" <<
-      left  << setfill(' ') << setw(7)  << "Cost" << "|" <<
-      right << setfill(' ') << setw(4)  << "QTY" << "|" <<
-      right << setfill(' ') << setw(4)  << "Need" << "|" <<
-      left  << setfill(' ') << setw(10) << "Unit" << "|" <<
-      right << setfill(' ') << setw(10) << "Expiry" <<
-      endl  <<
-      left  << setfill('-') <<
-      left  << setfill(' ') << setw(5)  << "|-" <<
-      left  << setfill(' ') << setw(7)  << "|-" <<
-      left  << setfill(' ') << setw(19) << "|-" <<
-      left  << setfill(' ') << setw(6)  << "|" <<
-      right << setfill(' ') << setw(4)  << "|" <<
-      left  << setfill(' ') << setw(4)  << "|-" <<
-      left  << setfill(' ') << setw(9)  << "|-" <<
-      left  << setfill(' ') << setw(9)  << endl;
+      " Row | UPC    | Item Name          | Cost  | QTY|Need| Unit     | Expiry   " << endl <<
+      "-----|--------|--------------------|-------|----|----|----------|----------" << endl;
+
+    do {
+      cout << setfill(' ') << right << setw(4) << (c+1) << " | " << *_items[c] << endl;
+      t += *_items[c];
+    } while (++c < _noOfItems);
+
+    cout <<
+      "---------------------------------------------------------------------------" << endl <<
+      "Total cost of support: $" << fixed << setprecision(2) << showpoint << t << endl;
   }
 
 
@@ -98,7 +100,7 @@ namespace oop244 {
   // closes the file
   void AidApp::saveRecs() {
     int c = 0;
-    datafile.open(_filename, ios::out);
+    datafile.open(_filename, ios::out | ios::app);
     do {
       _items[c]->store(datafile);
     } while (c++ < MAX_NO_RECS);
@@ -118,33 +120,32 @@ namespace oop244 {
     char c;
 
     datafile.open(_filename, ios::in);
-
     if (datafile.fail()) {
       datafile.clear();
       datafile.close();
       datafile.open(_filename, ios::out);
     } else {
-      while (datafile.fail() == false) {
-        c = 0;
-        if (_items[readIndex] != ((Item*)0)) {
-          delete _items[readIndex];
-          _items[readIndex] = 0;
+      do {
+        datafile >> c;
+        if (datafile.fail()) {
+          break;
         }
-        if (datafile >> c && !datafile.fail()) {
-          if (c=='P') {
-            _items[readIndex] = new NFI();
-          } else if (c=='N') {
-            _items[readIndex] = new Perishable();
-          }
+        datafile.ignore();
+
+        if (c=='N') {
+          _items[readIndex] = new NFI();
+        } else if (c == 'P') {
+          _items[readIndex] = new Perishable();
         }
+
         if (_items[readIndex] != ((Item*)0)) {
-          datafile >> c; // skip comma
           _items[readIndex++]->load(datafile);
         }
-      }
+      } while (true);
     }
 
     _noOfItems = readIndex;
+    datafile.clear();
     datafile.close();
   }
 
@@ -207,7 +208,7 @@ namespace oop244 {
     if (cin.fail()) {
       i->display(cout, false);
     } else {
-      datafile.open(_filename, ios::out);
+      datafile.open(_filename, ios::out | ios::app);
   		i->store(datafile);
       datafile.close();
   		cout << "Item added" << endl;
