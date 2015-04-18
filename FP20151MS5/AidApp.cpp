@@ -100,10 +100,12 @@ namespace oop244 {
   // closes the file
   void AidApp::saveRecs() {
     int c = 0;
-    datafile.open(_filename, ios::out | ios::app);
+    datafile.open(_filename, ios::out);
     do {
       _items[c]->store(datafile);
-    } while (c++ < MAX_NO_RECS);
+    } while (++c < _noOfItems);
+
+    datafile.clear();
     datafile.close();
   }
 
@@ -209,9 +211,9 @@ namespace oop244 {
       i->display(cout, false);
     } else {
       datafile.open(_filename, ios::out | ios::app);
-  		i->store(datafile);
+      i->store(datafile);
       datafile.close();
-  		cout << "Item added" << endl;
+      cout << "Item added" << endl;
     }
   }
 
@@ -236,12 +238,12 @@ namespace oop244 {
         addItem(true);
         loadRecs();
       } else if (n==4) {
-				cout << "Please enter the UPC: ";
-				cin >> u;
-				updateQty(u);
+        cout << "Please enter the UPC: ";
+        cin >> u;
+        updateQty(u);
       } else {
         cout << "==Invalid Selection, try again.===";
-  			cout << endl;
+        cout << endl;
       }
     }
 
